@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using System.Runtime.InteropServices;
 using JetBrains.Annotations;
+using System.Text;
 
 [assembly: MelonInfo(typeof(Multiplayer.Core), "Multiplayer", "1.0.0", "Jayden", null)]
 [assembly: MelonGame("Notional Games", "Beltmatic")]
@@ -46,6 +47,9 @@ namespace Multiplayer
 
         [DllImport("steam_api64", EntryPoint = "SteamAPI_ISteamNetworking_SendP2PPacket", CallingConvention = CallingConvention.Cdecl)]
         private static extern bool NativeSendP2PPacket(IntPtr pSteamNetworking, ulong steamIDRemote, byte[] pubData, uint cubData, int eP2PSendType, int nChannel);
+
+        [DllImport("steam_api64", EntryPoint = "SteamAPI_ISteamNetworking_AcceptP2PSessionWithUser", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool NativeAcceptP2PSessionWithUser(IntPtr pSteamNetworking, ulong steamIDRemote);
 
 
         private bool isSteamActive = false;
@@ -99,11 +103,7 @@ namespace Multiplayer
             try
             {
                 IntPtr networkingPtr = SteamAPI_SteamNetworking();
-
-                if (networkingPtr == IntPtr.Zero)
-                {
-                    return;
-                }
+                if (networkingPtr == IntPtr.Zero) return;
 
                 while (NativeIsP2PPacketAvailable(networkingPtr, out uint msgSize, 0))
                 {
@@ -112,14 +112,16 @@ namespace Multiplayer
                     byte[] incomingBytes = new byte[msgSize];
                     if (NativeReadP2PPacket(networkingPtr, incomingBytes, msgSize, out uint bytesRead, out ulong senderSteamId, 0))
                     {
+                        NativeAcceptP2PSessionWithUser(networkingPtr, senderSteamId);
+
                         string dataString = System.Text.Encoding.UTF8.GetString(incomingBytes);
-                        MelonLogger.Msg($"[Network] Packet from {senderSteamId}: {dataString}");
+                        MelonLogger.Msg($"[Network] Connection Success! Packet from {senderSteamId}: {dataString}");
                     }
                 }
             }
             catch (Exception ex)
             {
-                MelonLogger.Error($"[Network Error] Memory fault or pointer misalignment: {ex.Message}");
+                MelonLogger.Error($"[Network Error] Packet parsing exception: {ex.Message}");
             }
         }
 
@@ -155,6 +157,18 @@ namespace Multiplayer
             }
         }
 
+        public void SendDataToPlayer(ulong targetSteamId, byte[] rawBytes)
+        {
+            if (!isSteamActive) return;
+            IntPtr networkingPtr = SteamAPI_SteamNetworking();
+            if (networkingPtr == IntPtr.Zero)
+            {
+                MelonLogger.Error("Cannot send: ISteamNetworking interface pointer is null. ");
+                return;
+            }
+            NativeSendP2PPacket(networkingPtr, targetSteamId, rawBytes, (uint)rawBytes.Length, 0, 0);
+        }
+
         private void DrawWindow(int id)
         {
             if (centered == null)
@@ -169,6 +183,10 @@ namespace Multiplayer
             if (hasJoinedSession)
             {
                 GUI.Box(new Rect(0, 20, 150, 30), lobbyid.ToString(), centered);
+                if (Button(new Rect(0, 50, 150, 30), "Send Message"))
+                {
+                    SendDataToPlayer(140716150727504, Encoding.UTF8.GetBytes("Hello World!"));
+                }
             } else
             {
                 if (Button(new Rect(0, 20, 150, 30), "Host Lobby"))
@@ -273,7 +291,7 @@ namespace Multiplayer
                             NativeJoinLobby(matchmakingPtr, lobbyid);
                             hasJoinedSession = true;
                             LoggerInstance.Msg("Network packet listener activated for client connection.");
-                            window.height = 50;
+                            window.height = 80;
                         }
                     }
                 }

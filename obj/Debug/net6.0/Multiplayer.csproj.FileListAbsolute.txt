@@ -125,3 +125,4 @@ C:\Users\jayde\source\repos\Multiplayer\obj\Debug\net6.0\Multiplayer.dll
 C:\Users\jayde\source\repos\Multiplayer\obj\Debug\net6.0\refint\Multiplayer.dll
 C:\Users\jayde\source\repos\Multiplayer\obj\Debug\net6.0\Multiplayer.pdb
 C:\Users\jayde\source\repos\Multiplayer\obj\Debug\net6.0\ref\Multiplayer.dll
+C:\Users\jayde\source\repos\Multiplayer\obj\Debug\net6.0\Multiplayer.sourcelink.json
