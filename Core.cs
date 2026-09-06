@@ -1,9 +1,12 @@
 ﻿using System.Net;
 using System.Net.Sockets;
+using Il2Cpp;
 using LiteNetLib;
 using LiteNetLib.Utils;
 using MelonLoader;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [assembly: MelonInfo(typeof(Multiplayer.Core), "Multiplayer", "1.0.0", "Jayden", null)]
 [assembly: MelonGame("Notional Games", "Beltmatic")]
@@ -13,7 +16,9 @@ namespace Multiplayer
     public class Core : MelonMod
     {
         public NetworkManager network;
-        private Rect window = new(10, 10, 150, 110);
+        private Rect window = new(10, 10, 150, 50);
+        private bool visible = true;
+        private GameManager gameManager;
         public override void OnInitializeMelon()
         {
             LoggerInstance.Msg("Initialized.");
@@ -23,27 +28,75 @@ namespace Multiplayer
         public override void OnUpdate()
         {
             network?.Update();
+
+            var keyboard = Keyboard.current;
+            if (keyboard == null) return;
+
+            if (keyboard.f5Key.wasPressedThisFrame)
+            {
+                visible = !visible;
+            }
         }
 
         public override void OnGUI()
         {
-            window = GUI.Window(45763, window, (GUI.WindowFunction)DrawWindow, "Levelup Window");
+            if (visible)
+            {
+                window = GUI.Window(36354, window, (GUI.WindowFunction)DrawWindow, "Multiplayer Window");
+            }
+        }
+
+        private void PopulateGameManager()
+        {
+            GameObject dummy = new();
+            UnityEngine.Object.DontDestroyOnLoad(dummy);
+            Scene ddolScene = dummy.scene;
+            UnityEngine.Object.Destroy(dummy);
+            GameObject gameManagerGO = null;
+            var rootObjects = ddolScene.GetRootGameObjects();
+            foreach (var GO in rootObjects)
+            {
+                if (GO != null && GO.name == "GameManager")
+                {
+                    gameManagerGO = GO;
+                    break;
+                }
+            }
+            gameManager = gameManagerGO.GetComponent<GameManager>();
         }
 
         private void DrawWindow(int id)
         {
+            if (gameManager == null)
+            {
+                PopulateGameManager();
+            }
+
             GUI.DragWindow(new Rect(0, 0, 150, 20));
-            if (Button(new Rect(0, 20, 150, 30), "Host"))
+
+            if (network.isActiveSession)
             {
-                network?.StartServer(9050);
+                if (Button(new Rect(0, 20, 150, 30), "Send"))
+                {
+                    network?.SendString("Test Message 1");
+                }
             }
-            if (Button(new Rect(0, 50, 150, 30), "Join"))
+            else
             {
-                network?.StartClient("100.98.91.61", 9050, "Super Secret Password");
-            }
-            if (Button(new Rect(0, 80, 150, 30), "Send"))
-            {
-                network?.SendString("Test Message 1");
+                if (gameManager.demoSimulation == null)
+                {
+                    if (Button(new Rect(0, 20, 150, 30), "Host"))
+                    {
+                        network?.StartServer(9050);
+                    }
+                }
+                else
+                {
+                    if (Button(new Rect(0, 20, 150, 30), "Join"))
+                    {
+                        network?.StartClient("100.98.91.61", 9050, "Super Secret Password");
+                    }
+                }
             }
         }
 
@@ -72,13 +125,15 @@ namespace Multiplayer
     {
         private NetManager _netManager;
         private NetPacketProcessor _packetProcessor;
-        private List<NetPeer> _cachedPeerList = new List<NetPeer>();
+        private List<NetPeer> _cachedPeerList = [];
+        public bool isActiveSession = false;
 
         public void StartServer(int port)
         {
             _netManager = new NetManager(this) { AutoRecycle = true };
             _netManager.Start(port);
             Melon<Core>.Logger.Msg($"Server started on port: {port}");
+            isActiveSession = true;
         }
 
         public void StartClient(string ip, int port, string connectionKey)
@@ -86,6 +141,7 @@ namespace Multiplayer
             _netManager = new NetManager(this) { AutoRecycle = true };
             _netManager.Start();
             _netManager.Connect(ip, port, connectionKey);
+            isActiveSession = true;
         }
 
         public void Update()
@@ -95,9 +151,8 @@ namespace Multiplayer
 
         public void SendString(string message)
         {
-            if (_netManager != null) return;
-
-            NetDataWriter writer = new NetDataWriter();
+            if (_netManager == null) return;
+            NetDataWriter writer = new();
             writer.Put(message);
             _cachedPeerList.Clear();
             _netManager.GetConnectedPeers(_cachedPeerList);
@@ -110,6 +165,7 @@ namespace Multiplayer
         public void Stop()
         {
             _netManager?.Stop();
+            isActiveSession = false;
         }
 
         public void OnPeerConnected(NetPeer peer)

@@ -14,8 +14,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +28,7 @@
               "RelativeDocumentMoniker": "Core.cs",
               "ToolTip": "C:\\Users\\jayde\\source\\repos\\Multiplayer\\Core.cs",
               "RelativeToolTip": "Core.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAwwC0AAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAuwIQAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-29T15:53:28.883Z",
               "EditorCaption": ""
