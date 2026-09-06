@@ -296,6 +296,10 @@
 	<ItemGroup>
 		<Compile Include="Core.cs" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="LiteNetLib" Version="2.1.4" />
+	</ItemGroup>
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="COPY &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Beltmatic\Mods&quot;" />

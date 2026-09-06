@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "Multiplayer/1.0.0": {
         "dependencies": {
+          "LiteNetLib": "2.1.4",
           "0Harmony": "2.10.2.0",
           "Assembly-CSharp": "0.0.0.0",
           "Il2CppInterop.Common": "1.5.0.0",
@@ -101,6 +102,14 @@
         },
         "runtime": {
           "Multiplayer.dll": {}
+        }
+      },
+      "LiteNetLib/2.1.4": {
+        "runtime": {
+          "lib/netstandard2.1/LiteNetLib.dll": {
+            "assemblyVersion": "2.1.4.0",
+            "fileVersion": "2.1.4.0"
+          }
         }
       },
       "0Harmony/2.10.2.0": {
@@ -1006,6 +1015,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "LiteNetLib/2.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KWlxvMw3Urpqj9joD96LRiK+LC62pQNs/zkXRJc+rHnxgkGp+vV703xzDrxRmv+V1YhCFfIGzs5nrVWtREIlyA==",
+      "path": "litenetlib/2.1.4",
+      "hashPath": "litenetlib.2.1.4.nupkg.sha512"
     },
     "0Harmony/2.10.2.0": {
       "type": "reference",

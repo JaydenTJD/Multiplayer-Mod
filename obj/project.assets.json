@@ -1,11 +1,45 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "LiteNetLib/2.1.4": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/LiteNetLib.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/LiteNetLib.dll": {
+            "related": ".xml"
+          }
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "LiteNetLib/2.1.4": {
+      "sha512": "KWlxvMw3Urpqj9joD96LRiK+LC62pQNs/zkXRJc+rHnxgkGp+vV703xzDrxRmv+V1YhCFfIGzs5nrVWtREIlyA==",
+      "type": "package",
+      "path": "litenetlib/2.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LNL.png",
+        "README.md",
+        "lib/net8.0/LiteNetLib.dll",
+        "lib/net8.0/LiteNetLib.xml",
+        "lib/netstandard2.1/LiteNetLib.dll",
+        "lib/netstandard2.1/LiteNetLib.xml",
+        "litenetlib.2.1.4.nupkg.sha512",
+        "litenetlib.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "LiteNetLib >= 2.1.4"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\jayde\\.nuget\\packages\\": {},
@@ -59,6 +93,12 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "LiteNetLib": {
+            "target": "Package",
+            "version": "[2.1.4, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
