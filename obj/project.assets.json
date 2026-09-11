@@ -2,6 +2,29 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Facepunch.Steamworks/2.3.3": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Facepunch.Steamworks.Win64.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Facepunch.Steamworks.Win64.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Facepunch.Steamworks.Library/2.3.3": {
+        "type": "package",
+        "dependencies": {
+          "Facepunch.Steamworks": "2.3.2"
+        },
+        "build": {
+          "build/Facepunch.Steamworks.Library.props": {},
+          "build/Facepunch.Steamworks.Library.targets": {}
+        }
+      },
       "LiteNetLib/2.1.4": {
         "type": "package",
         "compile": {
@@ -18,6 +41,38 @@
     }
   },
   "libraries": {
+    "Facepunch.Steamworks/2.3.3": {
+      "sha512": "7nUjWX/uy6JbDX7Q3n8ij7vrpWjTM0S8hXO24R3ZwQ0QgY0sXVlxzh3unmYoLvKGi31rzDHqGX68I169hnHNxQ==",
+      "type": "package",
+      "path": "facepunch.steamworks/2.3.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Facepunch.Steamworks.jpg",
+        "content/steam_api64.dll",
+        "facepunch.steamworks.2.3.3.nupkg.sha512",
+        "facepunch.steamworks.nuspec",
+        "lib/net46/Facepunch.Steamworks.Win64.dll",
+        "lib/net46/Facepunch.Steamworks.Win64.xml",
+        "lib/netstandard2.0/Facepunch.Steamworks.Win64.dll",
+        "lib/netstandard2.0/Facepunch.Steamworks.Win64.xml"
+      ]
+    },
+    "Facepunch.Steamworks.Library/2.3.3": {
+      "sha512": "7Iin/sILrBfAMp/uqpG8ob2pZhpF3gsNHupHugyQv2ls6v0XyZ+gisK14z+G3Wn1Y6vV5SZMkwJJ1BIRlKhb7w==",
+      "type": "package",
+      "path": "facepunch.steamworks.library/2.3.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Facepunch.Steamworks.Library.props",
+        "build/Facepunch.Steamworks.Library.targets",
+        "build/x64/steam_api64.dll",
+        "build/x86/steam_api32.dll",
+        "facepunch.steamworks.library.2.3.3.nupkg.sha512",
+        "facepunch.steamworks.library.nuspec"
+      ]
+    },
     "LiteNetLib/2.1.4": {
       "sha512": "KWlxvMw3Urpqj9joD96LRiK+LC62pQNs/zkXRJc+rHnxgkGp+vV703xzDrxRmv+V1YhCFfIGzs5nrVWtREIlyA==",
       "type": "package",
@@ -38,6 +93,8 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Facepunch.Steamworks >= 2.3.3",
+      "Facepunch.Steamworks.Library >= 2.3.3",
       "LiteNetLib >= 2.1.4"
     ]
   },
@@ -94,6 +151,14 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Facepunch.Steamworks": {
+            "target": "Package",
+            "version": "[2.3.3, )"
+          },
+          "Facepunch.Steamworks.Library": {
+            "target": "Package",
+            "version": "[2.3.3, )"
+          },
           "LiteNetLib": {
             "target": "Package",
             "version": "[2.1.4, )"

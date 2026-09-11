@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Multiplayer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf28cd52d36a85fa65a4efac1eea92f9b6ad3504")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d4495ea0d1e36979eac94841666b8a085f7eeba")]
 [assembly: System.Reflection.AssemblyProductAttribute("Multiplayer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Multiplayer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

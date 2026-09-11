@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "GVv5kP9ZepE=",
+  "dgSpecHash": "DIYuoGwObJU=",
   "success": true,
   "projectFilePath": "C:\\Users\\jayde\\source\\repos\\Multiplayer\\Multiplayer.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\jayde\\.nuget\\packages\\facepunch.steamworks\\2.3.3\\facepunch.steamworks.2.3.3.nupkg.sha512",
+    "C:\\Users\\jayde\\.nuget\\packages\\facepunch.steamworks.library\\2.3.3\\facepunch.steamworks.library.2.3.3.nupkg.sha512",
     "C:\\Users\\jayde\\.nuget\\packages\\litenetlib\\2.1.4\\litenetlib.2.1.4.nupkg.sha512"
   ],
   "logs": []

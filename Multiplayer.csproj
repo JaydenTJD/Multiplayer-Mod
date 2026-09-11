@@ -298,6 +298,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Facepunch.Steamworks" Version="2.3.3" />
+	  <PackageReference Include="Facepunch.Steamworks.Library" Version="2.3.3" />
 	  <PackageReference Include="LiteNetLib" Version="2.1.4" />
 	</ItemGroup>
 	

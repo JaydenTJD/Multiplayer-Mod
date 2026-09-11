@@ -52,6 +52,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Facepunch.Steamworks": {
+              "target": "Package",
+              "version": "[2.3.3, )"
+            },
+            "Facepunch.Steamworks.Library": {
+              "target": "Package",
+              "version": "[2.3.3, )"
+            },
             "LiteNetLib": {
               "target": "Package",
               "version": "[2.1.4, )"

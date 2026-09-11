@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "Multiplayer/1.0.0": {
         "dependencies": {
+          "Facepunch.Steamworks": "2.3.3",
+          "Facepunch.Steamworks.Library": "2.3.3",
           "LiteNetLib": "2.1.4",
           "0Harmony": "2.10.2.0",
           "Assembly-CSharp": "0.0.0.0",
@@ -102,6 +104,19 @@
         },
         "runtime": {
           "Multiplayer.dll": {}
+        }
+      },
+      "Facepunch.Steamworks/2.3.3": {
+        "runtime": {
+          "lib/netstandard2.0/Facepunch.Steamworks.Win64.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Facepunch.Steamworks.Library/2.3.3": {
+        "dependencies": {
+          "Facepunch.Steamworks": "2.3.3"
         }
       },
       "LiteNetLib/2.1.4": {
@@ -1015,6 +1030,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Facepunch.Steamworks/2.3.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7nUjWX/uy6JbDX7Q3n8ij7vrpWjTM0S8hXO24R3ZwQ0QgY0sXVlxzh3unmYoLvKGi31rzDHqGX68I169hnHNxQ==",
+      "path": "facepunch.steamworks/2.3.3",
+      "hashPath": "facepunch.steamworks.2.3.3.nupkg.sha512"
+    },
+    "Facepunch.Steamworks.Library/2.3.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7Iin/sILrBfAMp/uqpG8ob2pZhpF3gsNHupHugyQv2ls6v0XyZ+gisK14z+G3Wn1Y6vV5SZMkwJJ1BIRlKhb7w==",
+      "path": "facepunch.steamworks.library/2.3.3",
+      "hashPath": "facepunch.steamworks.library.2.3.3.nupkg.sha512"
     },
     "LiteNetLib/2.1.4": {
       "type": "package",
